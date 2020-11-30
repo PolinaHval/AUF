@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import utils.Listener;
 
+import java.util.concurrent.TimeUnit;
+
 @Listeners(Listener.class)
 public class BaseTest {
     public WebDriver driver;
@@ -18,6 +20,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp (){
         this.driver =new BrowserService().getDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get(new ReadProperties().getURL()  );
 
     }

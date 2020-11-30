@@ -2,8 +2,11 @@ package pages;
 
 import baseEntities.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
     private static String ENDPOINT ="/auth/login/";
@@ -27,11 +30,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isPageOpened() {
-        try {
-            return driver.findElement(By.id("button_primary")).isDisplayed();
-        }catch (Exception ex){
-            return false;
-        }
+         return waiters.isElementDisplayed(By.id("button_primary"));
     }
 
     public WebElement getEmailField() {
@@ -39,7 +38,7 @@ public class LoginPage extends BasePage {
     }
 
     public WebElement getPasswordField() {
-        return driver.findElement(passwordSelector);
+        return waiters.getElementBy(passwordSelector);
     }
 
     public WebElement getLoginButton() {

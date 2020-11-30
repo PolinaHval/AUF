@@ -1,5 +1,7 @@
 package browserService;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.config.DriverManagerType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,17 +11,14 @@ import java.io.File;
 
 public class BrowserService {
     private WebDriver driver = null;
+    private DriverManagerType driverManagerType= null;
 
     public BrowserService(){
         String browserName = new ReadProperties().getBrowserName();
         switch(browserName.toLowerCase()){
             case"chrome":
-                ClassLoader classLoader = getClass().getClassLoader();
-                File file = new File(classLoader.getResource("drivers/chromedriver.exe").getFile());
-                String absolutePath = file.getAbsolutePath();
-
-                System.setProperty("webdriver.chrome.driver",absolutePath);
-
+                driverManagerType=DriverManagerType.CHROME;
+                WebDriverManager.getInstance(driverManagerType).setup();
 
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--disable-gpu");
@@ -31,11 +30,8 @@ public class BrowserService {
 
                 break;
             case "ie":
-                classLoader = getClass().getClassLoader();
-                file = new File(classLoader.getResource("drivers/IEDriverServer.exe").getFile());
-                absolutePath = file.getAbsolutePath();
-
-                System.setProperty("webdriver.ie.driver",absolutePath);
+                driverManagerType= DriverManagerType.IEXPLORER;
+                WebDriverManager.getInstance(driverManagerType).setup();
 
                 driver = new InternetExplorerDriver();
 

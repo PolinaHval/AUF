@@ -1,4 +1,5 @@
 import baseEntities.BaseTest;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -31,7 +32,11 @@ public class MainTest extends BaseTest {
 //    }
 
 
-    @Test
+    @Test(description="Description for Allure")
+    @Description("Немного деталей по тесту")
+    @Link("https://aqa07.atlassian.net/browse/AQA07-25")
+    @TmsLink("1")
+    @Severity(SeverityLevel.BLOCKER)
     public void loginPositiveTest() {
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.login(readProperties.getUserName(), readProperties.getPassword());
@@ -40,6 +45,8 @@ public class MainTest extends BaseTest {
     }
 
     @Test
+    @Issue("AQA07-25")
+    @Severity(SeverityLevel.NORMAL)
     public void loginNegativeTest1() {
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.login("fail", readProperties.getPassword());
@@ -88,12 +95,12 @@ public class MainTest extends BaseTest {
 //        loginSteps=new LoginSteps(driver);
 //        loginSteps.login(username, psw);
 //    }\
-
-    @Test(retryAnalyzer = Retry.class)
-    public void RetryTest(){
-        throw new NullPointerException();
-
-    }
+//
+//    @Test(retryAnalyzer = Retry.class)
+//    public void RetryTest(){
+//        throw new NullPointerException();
+//
+//    }
 
 
 }
