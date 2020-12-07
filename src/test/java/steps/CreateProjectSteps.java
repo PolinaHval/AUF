@@ -11,7 +11,9 @@ public class CreateProjectSteps {
     }
 
 
-    public void createProject(String name){
+    public void createProject(String username,String psw,String name){
+        LoginSteps loginSteps = new LoginSteps(driver);
+        loginSteps.login(username,psw);
         CreateProjectPage createProjectPage= new CreateProjectPage(driver,true);
         createProjectPage.getName().sendKeys(name);
         createProjectPage.getButton().submit();

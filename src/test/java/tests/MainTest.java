@@ -1,38 +1,50 @@
+package tests;
+
 import baseEntities.BaseTest;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import steps.CreateProjectSteps;
+import steps.DeleteSteps;
+import steps.EditPageSteps;
 import steps.LoginSteps;
 import utils.Retry;
 
 public class MainTest extends BaseTest {
     private LoginSteps loginSteps;
 
-//
-//    @Test(enabled = false)
-//    public void testCreateProject() {
-//        LoginSteps loginSteps = new LoginSteps(driver);
-//        loginSteps.login(readProperties.getUserName(), readProperties.getPassword());
-//        loginSteps.stepsCreateProject(readProperties.getName());
-//
-//        Assert.assertTrue(true);
-//    }
+
+    @Test(priority =7)
+    public void testDelete(){
+        DeleteSteps deleteSteps = new DeleteSteps(driver);
+        deleteSteps.delete(readProperties.getUserName(), readProperties.getPassword());
+
+        Assert.assertTrue(true);
+    }
 
 
-//    @Test(enabled = false)
-//    public void testEditProject() {
-//        LoginSteps loginSteps = new LoginSteps(driver);
-//        loginSteps.login(readProperties.getUserName(), readProperties.getPassword());
-//        loginSteps.stepsCreateProject(readProperties.getName());
-//        loginSteps.stepsEditProject(readProperties.getNewName());
-//
-//        Assert.assertTrue(true);
-//    }
+    @Test(priority = 5)
+    public void testCreateProject() {
+        CreateProjectSteps createProjectSteps = new CreateProjectSteps(driver);
+        createProjectSteps.createProject(readProperties.getUserName(), readProperties.getPassword(),
+                readProperties.getName());
+
+        Assert.assertTrue(true);
+    }
+
+    @Test(priority = 6)
+    public void testEditProject() {
+        EditPageSteps editPageSteps = new EditPageSteps(driver);
+        editPageSteps.stepsEditProject(readProperties.getUserName(), readProperties.getPassword(),
+                readProperties.getNewName());
+
+        Assert.assertTrue(true);
+    }
 
 
-    @Test(description="Description for Allure")
+    @Test(priority = 1, description="Description for Allure")
     @Description("Немного деталей по тесту")
     @Link("https://aqa07.atlassian.net/browse/AQA07-25")
     @TmsLink("1")
@@ -44,7 +56,7 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(true);
     }
 
-    @Test
+    @Test(priority = 2)
     @Issue("AQA07-25")
     @Severity(SeverityLevel.NORMAL)
     public void loginNegativeTest1() {
@@ -55,7 +67,7 @@ public class MainTest extends BaseTest {
                 "Email/Login or Password is incorrect. Please try again.", "Incorrect error message");
     }
 
-    @Test(enabled = false)
+    @Test(priority = 3)
     public void loginNegativeTest2() {
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.login(readProperties.getUserName(), "fail");
@@ -64,7 +76,7 @@ public class MainTest extends BaseTest {
                 "Email/Login or Password is incorrect. Please try again.", "Incorrect error message");
     }
 
-    @Test(enabled = false)
+    @Test(priority = 4)
     public void loginNegativeTest3() {
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.login("fail", "fail");
@@ -74,20 +86,20 @@ public class MainTest extends BaseTest {
     }
 
 
-    @DataProvider(name = "набор кредов")
-    public Object[][] credentialsFoeTest() {
-        return new Object[][]{
-                {"atrostyanko+072@gmail.com", "w3n1bU7F4rxOfnfvrBJL"},
-                {"incorrectUsername", "w3n1bU7F4rxOfnfvrBJL"},
-                {"atrostyanko+072@gmail.com", "incorrectPsw"},
-        };
-    }
-
-    @Test(enabled = false, dataProvider = "набор кредов")
-    public void testLoginWithMultiple(String username, String psw) {
-        loginSteps = new LoginSteps(driver);
-        loginSteps.login(username, psw);
-    }
+//    @DataProvider(name = "набор кредов")
+//    public Object[][] credentialsFoeTest() {
+//        return new Object[][]{
+//                {"atrostyanko+072@gmail.com", "w3n1bU7F4rxOfnfvrBJL"},
+//                {"incorrectUsername", "w3n1bU7F4rxOfnfvrBJL"},
+//                {"atrostyanko+072@gmail.com", "incorrectPsw"},
+//        };
+//    }
+//
+//    @Test(enabled = false, dataProvider = "набор кредов")
+//    public void testLoginWithMultiple(String username, String psw) {
+//        loginSteps = new LoginSteps(driver);
+//        loginSteps.login(username, psw);
+//    }
 
 //    @Parameters({"username", "psw"})
 //    @Test(enabled = false)

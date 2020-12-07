@@ -2,19 +2,17 @@ package pages;
 
 import baseEntities.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
-    private static String ENDPOINT ="/auth/login/";
+    private static String ENDPOINT ="/auth/login";
 
     protected By emailSelector = By.id("name");
     protected By passwordSelector = By.id("password");
     protected By loginSelector = By.id("button_primary");
     protected By ERROR_MESSAGE = By.className("error-text");
+
 
 
 
@@ -34,7 +32,7 @@ public class LoginPage extends BasePage {
     }
 
     public WebElement getEmailField() {
-        return driver.findElement(emailSelector);
+        return waiters.presenceOfElementLocated(emailSelector);
     }
 
     public WebElement getPasswordField() {
@@ -42,10 +40,11 @@ public class LoginPage extends BasePage {
     }
 
     public WebElement getLoginButton() {
-        return driver.findElement(loginSelector);
+        return waiters.isElementClickable(loginSelector);
     }
 
     public String getErrorMessage() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+        return waiters.getElementBy(ERROR_MESSAGE).getText();
     }
+
 }
