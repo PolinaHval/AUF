@@ -39,4 +39,31 @@ public class Waiters {
             return null;
         }
     }
+
+    public WebElement isElementClickable (By by){
+        try {
+            return webDriverWait.until(ExpectedConditions.elementToBeClickable(by));
+        }catch(TimeoutException ex){
+            return null;
+        }
+    }
+
+    public WebElement presenceOfElementLocated (By by){
+        try {
+            return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
+        }catch(TimeoutException ex){
+            return null;
+        }
+    }
+
+    public boolean textToBe (By by){
+        try {
+            webDriverWait.until(ExpectedConditions.textToBe(by,"Email/Login or Password is incorrect. Please try again."));
+            return true;
+        }catch(TimeoutException ex){
+            return false;
+        }
+    }
+
+
 }
