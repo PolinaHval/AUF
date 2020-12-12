@@ -16,6 +16,6 @@ public class CreateProjectSteps {
         loginSteps.login(username,psw);
         CreateProjectPage createProjectPage= new CreateProjectPage(driver,true);
         createProjectPage.getName().sendKeys(name);
-        createProjectPage.getButton().submit();
+        createProjectPage.getButton().click();
     }
 }

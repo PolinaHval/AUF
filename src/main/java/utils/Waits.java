@@ -8,16 +8,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Waiters {
+public class Waits {
     private WebDriver driver;
     private WebDriverWait webDriverWait;
 
-    public Waiters(WebDriver driver,int timeout) {
+    public Waits(WebDriver driver, int timeout) {
         this.driver = driver;
         webDriverWait=new WebDriverWait(driver,timeout );
     }
 
-    public Waiters (WebDriver driver ){
+    public Waits(WebDriver driver ){
         this.driver=driver;
         ReadProperties readProperties= new ReadProperties();
         webDriverWait = new WebDriverWait(driver, readProperties.getTimeOut());
@@ -55,15 +55,5 @@ public class Waiters {
             return null;
         }
     }
-
-    public boolean textToBe (By by){
-        try {
-            webDriverWait.until(ExpectedConditions.textToBe(by,"Email/Login or Password is incorrect. Please try again."));
-            return true;
-        }catch(TimeoutException ex){
-            return false;
-        }
-    }
-
 
 }
