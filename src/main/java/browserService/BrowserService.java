@@ -26,7 +26,7 @@ public class BrowserService {
                 chromeOptions.setHeadless(new ReadProperties().isHeadless());
 
                 driver = new ChromeDriver(chromeOptions);
-                driver.manage().window().maximize();
+//                driver.manage().window().maximize();
 
                 break;
             case "ie":

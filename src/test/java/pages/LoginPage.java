@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+
 public class LoginPage extends BasePage {
     private static String ENDPOINT ="/auth/login";
 
@@ -31,6 +32,7 @@ public class LoginPage extends BasePage {
          return waiters.isElementDisplayed(By.id("button_primary"));
     }
 
+
     public WebElement getEmailField() {
         return waiters.presenceOfElementLocated(emailSelector);
     }
@@ -40,11 +42,10 @@ public class LoginPage extends BasePage {
     }
 
     public WebElement getLoginButton() {
-        return waiters.isElementClickable(loginSelector);
+        return waiters.getElementBy(loginSelector);
     }
 
     public String getErrorMessage() {
         return waiters.getElementBy(ERROR_MESSAGE).getText();
     }
-
 }

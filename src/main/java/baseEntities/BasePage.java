@@ -2,6 +2,7 @@ package baseEntities;
 
 import browserService.ReadProperties;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import utils.Waits;
 
 public abstract class BasePage {
@@ -18,6 +19,8 @@ public abstract class BasePage {
         this.BASE_URL = readProperties.getURL();
         this.driver = driver;
         this.waiters = new Waits(driver);
+
+        PageFactory.initElements(driver,this);
 
         if (openPageByUrl) {
             openPage();
